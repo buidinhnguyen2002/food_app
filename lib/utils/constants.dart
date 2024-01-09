@@ -30,6 +30,12 @@ class AssetConstants {
   static const basePathImages = "assets/images/";
   static const emptyCart = "${basePathImages}clipboard.png";
   static const logo = "${basePathImages}foodu.png";
+  static const papalLogo = "${basePathImages}PayPal.png";
+  static const CODPayment = "${basePathImages}COD.png";
+
+  // ANIMATIONS
+  static const basePathAnimation = "assets/animations/";
+  static const animationTick = "${basePathAnimation}tick.json";
 
   //////////
   static const pathTempImageFolder = "/tmpImages/";
@@ -192,3 +198,5 @@ class DefaultValue {
   static const accessToken =
       "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiZDg5YmIwNmQ5YTgyNTYxYzgzZTJmMmYwZDNiOTIxMDZkYjE5YTYzNmIyYjU3N2I4NThkOTEyNzVmZGNiMzU3OGM1YWRhZjY2ZTM2YzY5YjYiLCJpYXQiOjE2NjQ0NDY2NTYuNjU2NjM3LCJuYmYiOjE2NjQ0NDY2NTYuNjU2NjQzLCJleHAiOjE2OTU5ODI2NTYuNjUxNjY5LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.PV-Mw0RDSfT0OWojilB-MFxxJIoh-b2iE0WYnW4zSNOMf0FP-1yUg4d1xERjeuzgirN3LWLBX_M8re3MBzfcR-rTIr-cRcDH2i_u4HF77YECVsFIqiUGkfUaaSf2SQa24Ha3SioG8OIYM25_WmXNsXKyrIMp7Vi0Qq_BjsQJyOkOFhqH-XEumORw73akGCkmrWA0WcL-om5xpj0GiafZs5qz19bNKzxzuF7q3Lguyo8df0PMpA_AhNmP4M7GpHT_gitlvINPRAHtD6p7WuHJ9w221EHOy1J97yVCgQy-7ymDZ6mZBAyDxRavP1j5H40GuS6ZtgUxbd-rF1t_VY96zxA4lS4uvEWjRzcBMu8TF2lspjb9WwYfUJHhew-mrq3Gy7wgfUkd-nItG2aOpeu6P8kJKcwGuoLN9wkZ_q7zsnphU8vHt5jH2IBCI_XpayG1CpRjhl10w4A2jip9evXlY1gPGOkCyCseunQpLcaq6wxltSqL6x4ZIxnWROIlNSJSiroco3SqeRDVNOHtC3B_vXW9TmE2lcceCO_Wv5VTNcgQxjKxLPyv-Szrc_FNLFm3OtseHR72qKv2qIOFdg_qZh3yZgCawRDQAYp0xo42c9FWAb_JU6lADew1QwPjpWi-OoI8qDSf4r3p0Jrdj4g8Lf-lAPXegi8MsQg5zNAzG0U";
 }
+
+const String google_api_key = "AIzaSyD8Sprfl49cbi9sRl1_zr6kAmjq1WStlxU";

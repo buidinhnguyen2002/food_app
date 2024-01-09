@@ -2,13 +2,36 @@ import 'dart:convert';
 
 import 'package:final_project/models/cart_item.dart';
 import 'package:final_project/models/order.dart';
+import 'package:final_project/models/payment.dart';
 import 'package:final_project/utils/api_constants.dart';
+import 'package:final_project/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class OrderProvider with ChangeNotifier {
   List<Order> _myOrder = [];
   int id;
+  List<Payment> payments = [
+    Payment(
+        name: "PayPal",
+        logo: AssetConstants.papalLogo,
+        value: 1,
+        widthIcon: 20),
+    Payment(
+        name: "Cash on delivery",
+        logo: AssetConstants.CODPayment,
+        value: 2,
+        widthIcon: 40),
+  ];
+  int _selectedPayment = 1;
+  int get selectedPayment {
+    return _selectedPayment;
+  }
+
+  set selectedPayment(int value) {
+    _selectedPayment = value;
+  }
+
   List<Order> get myOrder {
     return _myOrder;
   }
@@ -39,12 +62,14 @@ class OrderProvider with ChangeNotifier {
       print(_myOrder);
       notifyListeners();
     } catch (e) {
-      print("Loi $e");
+      print("Loi order provider $e");
     }
   }
 
   Future<bool> placeOrder(
-      {required List<CartItem> items, required double totalAmount}) async {
+      {required List<CartItem> items,
+      required double totalAmount,
+      required String status}) async {
     List<Map<String, dynamic>> itemsJson =
         items.map((item) => item.toJson()).toList();
     try {
@@ -58,7 +83,7 @@ class OrderProvider with ChangeNotifier {
           'delivery_fee': 10000,
           'unit': "VNĐ",
           'total_amount': totalAmount,
-          'is_paid': "Unpaid",
+          'is_paid': status,
           'driver_rating_of_customer': 5,
           'restaurant_rating_of_customer': 5,
           'status': "active",
@@ -71,7 +96,7 @@ class OrderProvider with ChangeNotifier {
         return true;
       }
     } catch (e) {
-      print(e);
+      print('Loi placeorder $e');
       return false;
     }
     return false;

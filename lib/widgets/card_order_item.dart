@@ -14,6 +14,7 @@ class CardOrderItem extends StatelessWidget {
     required this.labelButtonLeft,
     required this.labelButtonRight,
     this.onPressButtonLeft,
+    this.onPressButtonRight,
   });
   final String title;
   final int quantity;
@@ -23,6 +24,7 @@ class CardOrderItem extends StatelessWidget {
   final String labelButtonLeft;
   final String labelButtonRight;
   final Function? onPressButtonLeft;
+  final Function? onPressButtonRight;
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +115,7 @@ class CardOrderItem extends StatelessWidget {
                                                 .colorScheme
                                                 .error)),
                                 child: Text(
-                                  status,
+                                  status.toLowerCase(),
                                   style: TextStyle(
                                       color: status != 'cancelled'
                                           ? Theme.of(context)
@@ -150,13 +152,16 @@ class CardOrderItem extends StatelessWidget {
                     paddingVertical: 8,
                     backgroundColor: Colors.transparent,
                     textColor: Theme.of(context).colorScheme.primary,
+                    borderColor: Theme.of(context).colorScheme.primary,
                   ),
                 ),
                 BoxEmpty.sizeBox15,
                 Expanded(
                   child: CommonButton(
                     title: labelButtonRight,
-                    onPress: () {},
+                    onPress: onPressButtonRight != null
+                        ? onPressButtonRight as Function()
+                        : () {},
                     paddingVertical: 8,
                   ),
                 ),

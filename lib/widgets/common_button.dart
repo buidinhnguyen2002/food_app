@@ -10,10 +10,12 @@ class CommonButton extends StatelessWidget {
     this.paddingVertical,
     this.backgroundColor,
     this.textColor,
+    this.borderColor,
   });
   final double? paddingVertical;
   final Color? backgroundColor;
   final Color? textColor;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +29,8 @@ class CommonButton extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
           color: backgroundColor ?? Theme.of(context).colorScheme.primary,
-          // border: Border.all(
-          //     width: 2, color: Theme.of(context).colorScheme.primary),
+          border:
+              Border.all(width: 2, color: borderColor ?? Colors.transparent),
         ),
         child: Padding(
           // padding: EdgeInsets.all(16.0),

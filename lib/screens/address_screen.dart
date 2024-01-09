@@ -11,6 +11,7 @@ class AddressScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: Theme.of(context).iconTheme,
         backgroundColor: Theme.of(context).colorScheme.background,
         title: Text(
           "Deliver to",

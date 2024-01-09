@@ -1,0 +1,103 @@
+{
+    "home": "Home",
+    "@home": {
+        "description": "Icon home bottom navigation"
+    },
+    "order": "Order",
+    "@order": {
+        "description": "Icon order bottom navigation"
+    },
+    "label_restaurant": "Restaurant",
+    "@label_restaurant": {
+        "description": "Label restaurant bottom navigation"
+    },
+    "label_wallet": "Wallet",
+    "@label_wallet": {
+        "description": "Label wallet bottom navigation"
+    },
+    "label_profile": "Profile",
+    "@label_profile": {
+        "description": "Label wallet bottom navigation"
+    },
+    "label_payment_methods": "Payment Methods",
+    "@label_payment_methods": {
+        "description": "Label payment method index"
+    },
+    "label_address": "Address",
+    "@label_address": {
+        "description": "Label address index"
+    },
+    "label_language": "Language",
+    "@label_language": {
+        "description": "Label language index"
+    },
+    "label_mode_them": "Dark Mode",
+    "@label_mode_them": {
+        "description": "Label mode theme index"
+    },
+
+    "price": "Price",
+    "@price": {
+        "description": "Price"
+    },
+    "my_favorite_restaurant": "My favorite restaurants",
+    "@my_favorite_restaurant": {
+        "description": "My favorite restaurants"
+    },
+    "label_search": "Search",
+    "@label_search": {
+        "description": "Label search"
+    },
+    "label_special_offers": "Special Offers",
+    "@label_special_offers": {
+        "description": "Label Special Offers"
+    },
+    "label_see_all": "See all",
+    "@label_see_all": {
+        "description": "Label See all"
+    },
+    "label_discount_guaranteed": "Discount Guaranteed",
+    "@label_discount_guaranteed": {
+        "description": "Label Discount Guaranteed"
+    },
+    "label_recommended": "Recommended For You",
+    "@label_recommended": {
+        "description": "Label Recommended For You"
+    },
+    "label_delivery_to": "Delivery to",
+    "@label_delivery_to": {
+        "description": "Label Delivery to"
+    },
+    "label_order_active": "Active",
+    "@label_order_active": {
+        "description": "Label Active"
+    },
+    "label_order_completed": "Completed",
+    "@label_order_completed": {
+        "description": "Label Completed"
+    },
+    "label_order_cancelled": "Cancelled",
+    "@label_order_cancelled": {
+        "description": "Label Cancelled"
+    },
+    "button_order_cancelled": "Cancel Order",
+    "@button_order_cancelled": {
+        "description": "Label Cancel Order"
+    },
+    "button_order_track_driver": "Track Driver",
+    "@button_order_track_driver": {
+        "description": "Label Track Driver"
+    },
+    "label_order_status_pay_unpaid": "unpaid",
+    "@label_order_status_pay_unpaid": {
+        "description": "Label unpaid"
+    },
+    "label_order_status_pay_paid": "paid",
+    "@label_order_status_pay_paid": {
+        "description": "Label paid"
+    },
+    "label_sub_language": "English",
+    "@label_sub_language": {
+        "description": "Label English"
+    }
+}

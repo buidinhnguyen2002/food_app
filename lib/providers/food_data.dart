@@ -15,6 +15,18 @@ class FoodData with ChangeNotifier {
     return _food.firstWhere((food) => food.id == id);
   }
 
+  List<Food> getFoodByRestaurant(String resId) {
+    return _food.where((food) => food.restaurantId == resId).toList();
+  }
+
+  List<Food> getFoodBySearch(String keyWord) {
+    if (keyWord == '') return [];
+    return _food
+        .where((food) =>
+            food.foodName.toLowerCase().contains(keyWord.toLowerCase()))
+        .toList();
+  }
+
   Future<void> fetchAndSetFood() async {
     try {
       final response = await http.get(Uri.parse(API.getAllFoods));
