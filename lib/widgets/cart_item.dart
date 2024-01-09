@@ -1,5 +1,6 @@
 import 'package:final_project/providers/cart_provider.dart';
 import 'package:final_project/utils/colors.dart';
+import 'package:final_project/utils/functions.dart';
 import 'package:final_project/utils/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +32,7 @@ class CartItem extends StatelessWidget {
           color: Theme.of(context).colorScheme.onError,
         ),
       ),
-      key: ValueKey<int>(1),
+      key: ValueKey<String>(id),
       confirmDismiss: (direction) async {
         return await showDialog(
           context: context,
@@ -44,6 +45,8 @@ class CartItem extends StatelessWidget {
                   onPressed: () {
                     cart.removeItem(id);
                     Navigator.of(context).pop(true);
+                    showNotification(
+                        context, "Đã xóa $title ra khỏi giỏ hàng.");
                   },
                   child: const Text("Yes"),
                 ),

@@ -1,8 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:collection/collection.dart';
 import 'package:final_project/models/cart_item.dart';
+import 'package:final_project/providers/NavigatorProvider.dart';
 import 'package:final_project/providers/cart_provider.dart';
 import 'package:final_project/providers/order_provider.dart';
+import 'package:final_project/providers/restaurant_provider.dart';
 import 'package:final_project/screens/address_screen.dart';
+import 'package:final_project/screens/home_screen.dart';
+import 'package:final_project/screens/main_screen.dart';
 import 'package:final_project/screens/payment_screen.dart';
 import 'package:final_project/utils/colors.dart';
 import 'package:final_project/utils/functions.dart';
@@ -14,8 +20,10 @@ import 'package:final_project/widgets/common_button.dart';
 import 'package:final_project/widgets/product_summary_item.dart';
 import 'package:final_project/widgets/quantity_selector.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_paypal_checkout/flutter_paypal_checkout.dart';
+// import 'package:flutter_paypal_checkout/flutter_paypal_checkout.dart';
 import 'package:provider/provider.dart';
+import 'package:cupertino_icons/cupertino_icons.dart';
+import 'package:final_project/main.dart';
 
 class CheckOutScreen extends StatefulWidget {
   static const routeName = '/check-out';
@@ -61,7 +69,24 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
     );
   }
 
-  void handlePlaceOrder() {
+  void handlePlaceOrder(BuildContext context) async {
+    final order = Provider.of<OrderProvider>(context, listen: false);
+    final selectedPayment = order.selectedPayment;
+    if (selectedPayment == 1) {
+      checkoutWithPayPal(context);
+    } else {
+      callPlaceOrder("0");
+      await showNotification(context, "Place order successful");
+      Future.delayed(
+        Duration(seconds: 1, milliseconds: 50),
+        () => Navigator.pushNamedAndRemoveUntil(
+            context, MainScreen.routeName, (route) => false,
+            arguments: {"index": 1}),
+      );
+    }
+  }
+
+  void callPlaceOrder(String status) {
     final cart = Provider.of<CartProvider>(context, listen: false);
     final order = Provider.of<OrderProvider>(context, listen: false);
     final groupRestaurant = cart.groupOrdersByRestaurant();
@@ -70,90 +95,99 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
           0,
           (previousValue, item) =>
               previousValue + (item.price * item.quantity));
-      order.placeOrder(items: value, totalAmount: totalAmount);
+      order.placeOrder(items: value, totalAmount: totalAmount, status: status);
     });
   }
 
-  void checkoutWithPayPal() async {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (BuildContext context) => PaypalCheckout(
-        sandboxMode: true,
-        clientId:
-            "ATt2zw3QwlkRMVwbWKzL1CqpKC1qBHRU3sP54gs981n0HmIovmbvHdeCuPpnXeXXqJcWd7GyFtwvvDsw",
-        secretKey:
-            "EEMsI-DgEgnkQWKdf_Afs4ikNvhPQ8a7sadNrVGixVgjjyYloxRZKcPtNsFwmTYtDpTo_ke77r2Hx-0H",
-        returnURL: "success.snippetcoder.com",
-        cancelURL: "cancel.snippetcoder.com",
-        transactions: const [
-          {
-            "amount": {
-              "total": '70',
-              "currency": "USD",
-              "details": {
-                "subtotal": '70',
-                "shipping": '0',
-                "shipping_discount": 0
-              }
-            },
-            "description": "The payment transaction description.",
-            // "payment_options": {
-            //   "allowed_payment_method":
-            //       "INSTANT_FUNDING_SOURCE"
-            // },
-            "item_list": {
-              "items": [
-                {
-                  "name": "Apple",
-                  "quantity": 4,
-                  "price": '5',
-                  "currency": "USD"
-                },
-                {
-                  "name": "Pineapple",
-                  "quantity": 5,
-                  "price": '10',
-                  "currency": "USD"
-                }
-              ],
+  void checkoutWithPayPal(BuildContext ctx) async {
+    // final result = await Navigator.of(ctx).push(MaterialPageRoute(
+    //   builder: (ctx) => PaypalCheckout(
+    //     sandboxMode: true,
+    //     clientId:
+    //         "ATt2zw3QwlkRMVwbWKzL1CqpKC1qBHRU3sP54gs981n0HmIovmbvHdeCuPpnXeXXqJcWd7GyFtwvvDsw",
+    //     secretKey:
+    //         "EEMsI-DgEgnkQWKdf_Afs4ikNvhPQ8a7sadNrVGixVgjjyYloxRZKcPtNsFwmTYtDpTo_ke77r2Hx-0H",
+    //     returnURL: "success.snippetcoder.com",
+    //     cancelURL: "cancel.snippetcoder.com",
+    //     transactions: const [
+    //       {
+    //         "amount": {
+    //           "total": '70',
+    //           "currency": "USD",
+    //           "details": {
+    //             "subtotal": '70',
+    //             "shipping": '0',
+    //             "shipping_discount": 0
+    //           }
+    //         },
+    //         "description": "The payment transaction description.",
+    //         // "payment_options": {
+    //         //   "allowed_payment_method":
+    //         //       "INSTANT_FUNDING_SOURCE"
+    //         // },
+    //         "item_list": {
+    //           "items": [
+    //             {
+    //               "name": "Apple",
+    //               "quantity": 4,
+    //               "price": '5',
+    //               "currency": "USD"
+    //             },
+    //             {
+    //               "name": "Pineapple",
+    //               "quantity": 5,
+    //               "price": '10',
+    //               "currency": "USD"
+    //             }
+    //           ],
 
-              // shipping address is not required though
-              //   "shipping_address": {
-              //     "recipient_name": "Raman Singh",
-              //     "line1": "Delhi",
-              //     "line2": "",
-              //     "city": "Delhi",
-              //     "country_code": "IN",
-              //     "postal_code": "11001",
-              //     "phone": "+00000000",
-              //     "state": "Texas"
-              //  },
-            }
-          }
-        ],
-        note: "Contact us for any questions on your order.",
-        onSuccess: (Map params) async {
-          print("onSuccess: $params");
-        },
-        onError: (error) {
-          print("onError: $error");
-          Navigator.pop(context);
-        },
-        onCancel: () {
-          print('cancelled:');
-        },
-      ),
-    ));
+    //           // shipping address is not required though
+    //           //   "shipping_address": {
+    //           //     "recipient_name": "Raman Singh",
+    //           //     "line1": "Delhi",
+    //           //     "line2": "",
+    //           //     "city": "Delhi",
+    //           //     "country_code": "IN",
+    //           //     "postal_code": "11001",
+    //           //     "phone": "+00000000",
+    //           //     "state": "Texas"
+    //           //  },
+    //         }
+    //       }
+    //     ],
+    //     note: "Contact us for any questions on your order.",
+    //     onSuccess: (Map params) async {
+    //       callPlaceOrder("1");
+    //       Navigator.pop(ctx, "success");
+    //       print("onSuccess: $params");
+    //     },
+    //     onError: (error) {
+    //       print("onError: $error");
+    //       Navigator.pop(context);
+    //     },
+    //     onCancel: () {
+    //       print('cancelled:');
+    //       Navigator.pop(ctx);
+    //     },
+    //   ),
+    // ));
+    // if (result != null) {
+    //   Navigator.pushNamedAndRemoveUntil(
+    //       ctx, MainScreen.routeName, (route) => false,
+    //       arguments: {"index": 1});
+    // }
   }
 
   List<Widget> _buildOrderSummaryByRestaurant(
       Map<String, List<CartItem>> groupByRestaurant) {
     List<Widget> widgetList = [];
-
+    final restaurantProvider = Provider.of<RestaurantProvider>(context);
     groupByRestaurant.forEach((key, value) {
+      final resName = restaurantProvider.getRestaurantById(key).name;
       widgetList.add(
         CardTitle(
           title: "Order Summary",
-          restaurantName: "ABC",
+          restaurantName: resName,
           child: Column(
             children: value.mapIndexed((index, food) {
               return Column(
@@ -182,6 +216,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
     final groupOrdersByRestaurant = cart.groupOrdersByRestaurant();
     return Scaffold(
       appBar: AppBar(
+        iconTheme: Theme.of(context).iconTheme,
         backgroundColor: Theme.of(context).colorScheme.background,
         title: Text("Checkout Orders",
             style: Theme.of(context).textTheme.titleMedium),
@@ -200,7 +235,6 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                       child: Column(
                         children: [
                           horizontalLine(context),
-                          // AddressItem(title: "Home", description: "ABC"),
                           ListTile(
                             contentPadding: const EdgeInsets.all(0),
                             leading: const CircleAvatar(
@@ -346,8 +380,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
           ),
           BottomWidget(
             child: CommonButton(
-                title: "Place order - $deliveryFee VNĐ",
-                onPress: checkoutWithPayPal),
+              title: "Place order - $deliveryFee VNĐ",
+              onPress: () => handlePlaceOrder(context),
+            ),
           )
         ],
       ),

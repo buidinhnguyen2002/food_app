@@ -1,10 +1,12 @@
 import 'package:final_project/providers/cart_provider.dart';
 import 'package:final_project/providers/food_data.dart';
+import 'package:final_project/utils/functions.dart';
 import 'package:final_project/utils/widgets.dart';
 import 'package:final_project/widgets/common_button.dart';
 import 'package:final_project/widgets/quantity_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   static const routeName = '/product-detail';
@@ -42,6 +44,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           Provider.of<FoodData>(context, listen: false).getFoodById(id);
       return Scaffold(
         appBar: AppBar(
+          iconTheme: Theme.of(context).iconTheme,
           backgroundColor: Theme.of(context).colorScheme.background,
           title: Text(food.foodName),
         ),
@@ -64,7 +67,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Price: ${food.price} VNĐ",
+                      "${AppLocalizations.of(context)!.price} ${food.price} VNĐ",
+                      // "Price: ${food.price} VNĐ",
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.w700,
@@ -141,6 +145,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 cart.cartId,
                                 food.restaurantId,
                               );
+                              showNotification(context,
+                                  "Đã thêm $quantity sản phẩm này vào giỏ hàng.");
                             },
                           ),
                         ),

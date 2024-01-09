@@ -29,6 +29,7 @@ class ProductItem extends StatelessWidget {
       },
       radius: 50,
       child: Container(
+        margin: const EdgeInsets.only(bottom: 15),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,

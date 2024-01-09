@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:final_project/models/http_exception.dart';
+import 'package:final_project/models/language.dart';
 import 'package:final_project/utils/api_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -9,6 +10,12 @@ class Auth with ChangeNotifier {
   bool _isLogin = false;
   int _idCart = 0;
   int _id = 0;
+  String _avatar = "";
+
+  String get avatar {
+    return _avatar;
+  }
+
   bool get isAuth {
     return _isLogin;
   }
@@ -40,6 +47,7 @@ class Auth with ChangeNotifier {
         final data = responseData['data'];
         _idCart = data['cart_id'];
         _id = data['id'];
+        _avatar = data['avatar'];
       } else {
         _isLogin = false;
       }
@@ -47,5 +55,39 @@ class Auth with ChangeNotifier {
     } catch (error) {
       rethrow;
     }
+  }
+
+  Locale _currentLocale = Locale('vi');
+  int _selectedLanguage = 1;
+  final Map<int, Locale> _locales = {
+    1: const Locale('en'),
+    2: const Locale('vi'),
+  };
+  final List<Language> _languages = [
+    Language(name: "English", locale: const Locale('en'), value: 1),
+    Language(name: "Viet Nam", locale: const Locale('vi'), value: 2),
+  ];
+  List<Language> get languages {
+    return _languages;
+  }
+
+  int get selectedLanguage {
+    return _selectedLanguage;
+  }
+
+  void set selectedLanguage(int value) {
+    _selectedLanguage = value;
+    notifyListeners();
+  }
+
+  Map<int, Locale> get locales {
+    return _locales;
+  }
+
+  Locale get currentLocale => _languages[_selectedLanguage - 1].locale;
+
+  void changeLocale(Locale newLocale) {
+    _currentLocale = newLocale;
+    notifyListeners();
   }
 }

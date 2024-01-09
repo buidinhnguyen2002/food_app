@@ -1,8 +1,11 @@
+import 'package:final_project/models/restaurant.dart';
 import 'package:final_project/providers/auth.dart';
 import 'package:final_project/providers/cart_provider.dart';
 import 'package:final_project/providers/category_data.dart';
 import 'package:final_project/providers/food_data.dart';
 import 'package:final_project/providers/order_provider.dart';
+import 'package:final_project/providers/restaurant_provider.dart';
+import 'package:final_project/providers/review_provider.dart';
 import 'package:final_project/screens/main_screen.dart';
 import 'package:final_project/utils/constants.dart';
 import 'package:final_project/utils/functions.dart';
@@ -32,6 +35,10 @@ class _SplashScreenState extends State<SplashScreen> {
   void loadData() async {
     final cartId = Provider.of<Auth>(context, listen: false).cartId;
     Provider.of<CartProvider>(context, listen: false).cartId = cartId;
+    await Provider.of<RestaurantProvider>(context, listen: false)
+        .fetchAndSetRestaurant();
+    await Provider.of<ReviewProvider>(context, listen: false)
+        .fetchAndSetReview();
     await Provider.of<FoodData>(context, listen: false).fetchAndSetFood();
     await Provider.of<OrderProvider>(context, listen: false).fetchAndSetOrder();
     await Provider.of<CategoryData>(context, listen: false)
@@ -39,7 +46,6 @@ class _SplashScreenState extends State<SplashScreen> {
     await Provider.of<CartProvider>(context, listen: false).fetchAndSetMyCart();
     Future.delayed(
       const Duration(seconds: 2),
-      // () => navigation(context, MainScreen.routeName),
       () => Navigator.of(context).pushNamed(MainScreen.routeName),
     );
   }

@@ -1,8 +1,11 @@
 import 'package:final_project/providers/order_provider.dart';
+import 'package:final_project/screens/order_tracking_screen.dart';
+import 'package:final_project/utils/functions.dart';
 import 'package:final_project/utils/widgets.dart';
 import 'package:final_project/widgets/card_order_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OrderScreen extends StatelessWidget {
   const OrderScreen({super.key});
@@ -20,10 +23,10 @@ class OrderScreen extends StatelessWidget {
         child: Column(
           children: [
             TabBar(
-              tabs: const [
-                Tab(text: "Active"),
-                Tab(text: "Completed"),
-                Tab(text: "Cancelled"),
+              tabs: [
+                Tab(text: AppLocalizations.of(context)!.label_order_active),
+                Tab(text: AppLocalizations.of(context)!.label_order_completed),
+                Tab(text: AppLocalizations.of(context)!.label_order_cancelled),
               ],
               unselectedLabelColor: Theme.of(context).colorScheme.tertiary,
               labelStyle: Theme.of(context).textTheme.headlineLarge,
@@ -40,12 +43,21 @@ class OrderScreen extends StatelessWidget {
                           quantity: order.quantityItem,
                           title: order.name,
                           totalAmount: order.totalAmount,
-                          status: order.status,
+                          status: order.isPaid
+                              ? AppLocalizations.of(context)!
+                                  .label_order_status_pay_paid
+                              : AppLocalizations.of(context)!
+                                  .label_order_status_pay_unpaid,
                           imageSource: order.image,
-                          labelButtonLeft: "Cancel Order",
-                          labelButtonRight: "Track Driver",
+                          labelButtonLeft: AppLocalizations.of(context)!
+                              .button_order_cancelled,
+                          labelButtonRight: AppLocalizations.of(context)!
+                              .button_order_track_driver,
                           onPressButtonLeft: () =>
                               orderProvider.handleCancelOrder(order.id),
+                          onPressButtonRight: () {
+                            navigation(context, OrderTrackingScreen.routeName);
+                          },
                         );
                       }),
                   ListView.builder(
@@ -71,6 +83,7 @@ class OrderScreen extends StatelessWidget {
                           quantity: order.quantityItem,
                           title: order.name,
                           totalAmount: order.totalAmount,
+                          // status: order.status,
                           status: order.status,
                           imageSource: order.image,
                           labelButtonLeft: "Leave a Review",

@@ -1,7 +1,12 @@
+import 'package:final_project/providers/order_provider.dart';
+import 'package:final_project/utils/constants.dart';
+import 'package:final_project/utils/functions.dart';
 import 'package:final_project/utils/widgets.dart';
 import 'package:final_project/widgets/bottom_widget.dart';
 import 'package:final_project/widgets/common_button.dart';
+import 'package:final_project/widgets/payment_item.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
@@ -14,6 +19,13 @@ class PaymentScreen extends StatefulWidget {
 class _PaymentScreenState extends State<PaymentScreen> {
   bool isChecked = false;
   int _selectedPayments = 0;
+  @override
+  void initState() {
+    super.initState();
+    _selectedPayments =
+        Provider.of<OrderProvider>(context, listen: false).selectedPayment;
+  }
+
   void changePayments(int i) {
     setState(() {
       _selectedPayments = i;
@@ -22,8 +34,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final orderProvider = Provider.of<OrderProvider>(context, listen: false);
+    final payments = orderProvider.payments;
     return Scaffold(
       appBar: AppBar(
+        iconTheme: Theme.of(context).iconTheme,
         backgroundColor: Theme.of(context).colorScheme.background,
         title: Text(
           "Payment Methods",
@@ -41,72 +56,41 @@ class _PaymentScreenState extends State<PaymentScreen> {
               padding: EdgeInsets.only(left: 20, right: 20),
               child: Column(
                 children: [
-                  Container(
-                    padding: EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface,
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: ListTile(
-                      contentPadding: EdgeInsets.all(0),
-                      leading: Icon(Icons.paypal),
-                      title: Text(
-                        "PayPal",
-                        style: Theme.of(context).textTheme.headlineLarge,
-                      ),
-                      trailing: Radio(
-                        value: 1,
-                        groupValue: _selectedPayments,
-                        onChanged: (value) => changePayments(value!),
-                        fillColor: MaterialStateProperty.resolveWith<Color?>(
-                          (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.selected)) {
-                              return Theme.of(context).colorScheme.primary;
-                            }
-                            return Theme.of(context).colorScheme.primary;
-                          },
-                        ),
-                      ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        final payment = payments[index];
+                        return PaymentItem(
+                            changePayment: changePayments,
+                            value: payment.value,
+                            title: payment.name,
+                            logo: payment.logo,
+                            selectedPayment: _selectedPayments,
+                            width: payment.widthIcon);
+                      },
+                      itemCount: payments.length,
                     ),
                   ),
-                  BoxEmpty.sizeBox20,
-                  Container(
-                    padding: EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface,
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    child: ListTile(
-                      contentPadding: EdgeInsets.all(0),
-                      leading: Icon(Icons.paypal),
-                      title: Text("PayPal"),
-                      trailing: Radio(
-                        value: 2,
-                        groupValue: _selectedPayments,
-                        onChanged: (value) => changePayments(value!),
-                        fillColor: MaterialStateProperty.resolveWith<Color?>(
-                          (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.selected)) {
-                              return Theme.of(context).colorScheme.primary;
-                            }
-                            return Theme.of(context).colorScheme.primary;
-                          },
-                        ),
-                      ),
-                    ),
-                  ),
-                  BoxEmpty.sizeBox20,
                   CommonButton(
                       title: "Add New Card",
                       onPress: () {},
-                      backgroundColor: Color.fromARGB(29, 25, 153, 68),
+                      backgroundColor: const Color.fromARGB(29, 25, 153, 68),
                       textColor: Theme.of(context).colorScheme.primary),
                 ],
               ),
             ),
           ),
           BottomWidget(
-            child: CommonButton(title: "Apply", onPress: () {}),
+            child: CommonButton(
+                title: "Apply",
+                onPress: () {
+                  orderProvider.selectedPayment = _selectedPayments;
+                  showNotification(context, "Apply payment successful");
+                  Future.delayed(
+                    const Duration(seconds: 1, milliseconds: 50),
+                    () => Navigator.pop(context),
+                  );
+                }),
           ),
         ],
       ),
