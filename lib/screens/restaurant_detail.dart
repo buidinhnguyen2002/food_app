@@ -8,7 +8,7 @@ import 'package:final_project/widgets/menu_restaurant_item.dart';
 import 'package:final_project/widgets/product_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class RestaurantDetail extends StatelessWidget {
   const RestaurantDetail({super.key});
   static const routeName = '/restaurant-detail';
@@ -101,7 +101,7 @@ class RestaurantDetail extends StatelessWidget {
                       color: Theme.of(context).colorScheme.primary,
                     ),
                     title: Text(
-                      "Offers are available",
+                      AppLocalizations.of(context)!.label_offers_available,
                       style: Theme.of(context).textTheme.headlineLarge,
                     ),
                     dense: true,
@@ -116,7 +116,7 @@ class RestaurantDetail extends StatelessWidget {
                   const CustomDivider(),
                   BoxEmpty.sizeBox15,
                   Text(
-                    "Menu",
+                    AppLocalizations.of(context)!.label_menu,
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   Expanded(

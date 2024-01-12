@@ -40,6 +40,7 @@ class Auth with ChangeNotifier {
       final responseData = json.decode(response.body);
       print(responseData);
       if (responseData['status'] == 'error') {
+        print("DAY");
         throw HttpException(responseData['message']);
       }
       if (responseData['status'] == 'success') {
@@ -53,6 +54,7 @@ class Auth with ChangeNotifier {
       }
       notifyListeners();
     } catch (error) {
+      print("DAYyyyyyy $error");
       rethrow;
     }
   }

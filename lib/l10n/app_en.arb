@@ -99,5 +99,41 @@
     "label_sub_language": "English",
     "@label_sub_language": {
         "description": "Label English"
+    },
+    "label_available": "Available",
+    "@label_available": {
+        "description": "Label Available"
+    },
+    "label_total": "Total",
+    "@label_total": {
+        "description": "Label Available"
+    },
+    "button_add_to_cart": "Add to button_add_to_cart",
+    "@button_add_to_cart": {
+        "description": "button add to cart"
+    },
+    "label_offers_available": "Offers availibale",
+    "@label_total": {
+        "description": "Offers availibale"
+    },
+    "label_menu": "Menu",
+    "@label_menu": {
+        "description": "Menu"
+    },
+    "button_check_out": "Check out",
+    "@button_check_out": {
+        "description": "check out"
+    },
+    "label_empty": "You don't have any foods in cart at this time",
+    "@label_empty": {
+        "description": "Empty"
+    },
+    "label_my_cart": "My cart",
+    "@label_my_cart": {
+        "description": "My cart"
+    },
+     "label_items": "items",
+    "@label_items": {
+        "description": "items"
     }
 }

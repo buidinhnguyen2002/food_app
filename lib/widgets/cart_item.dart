@@ -4,7 +4,7 @@ import 'package:final_project/utils/functions.dart';
 import 'package:final_project/utils/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class CartItem extends StatelessWidget {
   const CartItem(
       {super.key,
@@ -93,7 +93,7 @@ class CartItem extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "$quantity items",
+                        "$quantity ${AppLocalizations.of(context)!.label_items}",
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       BoxEmpty.sizeBox5,

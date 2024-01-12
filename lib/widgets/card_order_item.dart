@@ -2,7 +2,7 @@ import 'package:final_project/utils/colors.dart';
 import 'package:final_project/utils/widgets.dart';
 import 'package:final_project/widgets/common_button.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class CardOrderItem extends StatelessWidget {
   const CardOrderItem({
     super.key,
@@ -70,7 +70,7 @@ class CardOrderItem extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            "$quantity items",
+                            "$quantity ${AppLocalizations.of(context)!.label_items}",
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
                           BoxEmpty.sizeBox5,

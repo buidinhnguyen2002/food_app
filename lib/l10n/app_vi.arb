@@ -23,5 +23,14 @@
     "button_order_track_driver": "Theo dõi đơn hàng",
     "label_order_status_pay_unpaid": "Chưa thanh toán",
     "label_order_status_pay_paid": "Đã thanh toán",
-    "label_sub_language": "Tiếng Việt"
+    "label_sub_language": "Tiếng Việt",
+    "label_available": "Có sẵn",
+    "label_total": "Tổng",
+    "button_add_to_cart": "Thêm vào giỏ hàng",
+    "label_offers_available": "Ưu đãi",
+    "label_menu": "Thực đơn",
+    "button_check_out": "Thanh toán",
+    "label_empty": "Không có đơn hàng",
+    "label_my_cart": "Giỏ hàng",
+    "label_items": "món"
 }
