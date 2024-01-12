@@ -10,7 +10,7 @@ import 'package:final_project/widgets/quantity_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/cart_item.dart' as ci;
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
   static const routeName = '/cart';
@@ -34,7 +34,7 @@ class CartScreen extends StatelessWidget {
           ),
           BoxEmpty.sizeBox10,
           Text(
-            "You don't have any foods in cart at this time",
+            AppLocalizations.of(context)!.label_empty,
             style: Theme.of(context).textTheme.headlineMedium,
           ),
         ],
@@ -87,7 +87,7 @@ class CartScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Total:",
+                      AppLocalizations.of(context)!.label_total,
                       style: Theme.of(context).textTheme.titleSmall,
                     ),
                     Text(
@@ -101,7 +101,7 @@ class CartScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: CommonButton(
-                        title: "Check out",
+                        title: AppLocalizations.of(context)!.button_check_out,
                         onPress: () {
                           navigation(context, CheckOutScreen.routeName);
                         },
@@ -126,7 +126,7 @@ class CartScreen extends StatelessWidget {
         iconTheme: Theme.of(context).iconTheme,
         backgroundColor: Theme.of(context).colorScheme.background,
         title: Text(
-          "My Cart",
+          AppLocalizations.of(context)!.label_my_cart,
           style: Theme.of(context).textTheme.titleMedium,
         ),
       ),
