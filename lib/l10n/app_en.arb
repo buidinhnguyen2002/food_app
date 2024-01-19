@@ -135,5 +135,13 @@
      "label_items": "items",
     "@label_items": {
         "description": "items"
-    }
+     },
+    "button_apply": "Apply",
+    "@button_apply": {
+        "description": "apply"
+     },
+     "label_Change_languages": "Change languages successful",
+    "@label_items": {
+        "description": "Change languages successful"
+     }
 }
