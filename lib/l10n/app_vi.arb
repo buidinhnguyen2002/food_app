@@ -32,5 +32,7 @@
     "button_check_out": "Thanh toán",
     "label_empty": "Không có đơn hàng",
     "label_my_cart": "Giỏ hàng",
-    "label_items": "món"
+    "label_items": "món",
+    "button_apply": "Áp dụng",
+    "label_Change_languages": "Thay đổi ngôn ngữ thành công"
 }

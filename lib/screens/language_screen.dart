@@ -4,7 +4,7 @@ import 'package:final_project/widgets/bottom_widget.dart';
 import 'package:final_project/widgets/common_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class LanguageScreen extends StatefulWidget {
   const LanguageScreen({super.key});
   static const routeName = "/language-screen";
@@ -37,7 +37,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
         iconTheme: Theme.of(context).iconTheme,
         backgroundColor: Theme.of(context).colorScheme.background,
         title: Text(
-          "Languages",
+          AppLocalizations.of(context)!.label_language,
           style: Theme.of(context).textTheme.titleMedium,
         ),
       ),
@@ -91,10 +91,10 @@ class _LanguageScreenState extends State<LanguageScreen> {
           ),
           BottomWidget(
             child: CommonButton(
-                title: "Apply",
+                title: AppLocalizations.of(context)!.button_apply,
                 onPress: () {
                   auth.selectedLanguage = _selectedLanguage;
-                  showNotification(context, "Change languages successful");
+                  showNotification(context, AppLocalizations.of(context)!.label_Change_languages);
                   Future.delayed(
                     const Duration(seconds: 1, milliseconds: 50),
                     () => Navigator.pop(context),
