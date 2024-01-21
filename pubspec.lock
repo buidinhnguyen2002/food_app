@@ -33,6 +33,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  carousel_slider:
+    dependency: "direct main"
+    description:
+      name: carousel_slider
+      sha256: "9c695cc963bf1d04a47bd6021f68befce8970bcd61d24938e1fb0918cf5d9c42"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2.1"
   characters:
     dependency: transitive
     description:
@@ -102,6 +110,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_inappwebview:
+    dependency: transitive
+    description:
+      name: flutter_inappwebview
+      sha256: d198297060d116b94048301ee6749cd2e7d03c1f2689783f52d210a6b7aba350
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.8.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -115,6 +131,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_paypal_checkout:
+    dependency: "direct main"
+    description:
+      name: flutter_paypal_checkout
+      sha256: "5cc8bd4e67acb9befbbc935a0f2d4d468ddb8e5120a24ad21ed7518b44b47b2e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -127,10 +151,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_polyline_points
-      sha256: "0e07862139cb65a88789cd6efbe284c0b6f1fcb5ed5ec87781759c48190d84b9"
+      sha256: "02699e69142f51a248d784b6e3eec524194467fca5f7c4da19699ce2368b6980"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.0"
+    version: "1.0.0"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -149,6 +173,38 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  geocoding:
+    dependency: "direct main"
+    description:
+      name: geocoding
+      sha256: e1dc0ac56666d9ed1d5a9ae5543ce9eb5986db6209cc7600103487d09192059c
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
+  geocoding_android:
+    dependency: transitive
+    description:
+      name: geocoding_android
+      sha256: "609db1d71bc364dd9d0616f72a41c01e0c74f3a3807efb85e0d5a67e57baf50f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.2"
+  geocoding_ios:
+    dependency: transitive
+    description:
+      name: geocoding_ios
+      sha256: "8f79e380abb640ef4d88baee8bb65390058c802601158d0813dc990b36b189d2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
+  geocoding_platform_interface:
+    dependency: transitive
+    description:
+      name: geocoding_platform_interface
+      sha256: "8848605d307d844d89937cdb4b8ad7dfa880552078f310fa24d8a460f6dddab4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   google_maps:
     dependency: transitive
     description:
@@ -209,10 +265,10 @@ packages:
     dependency: "direct main"
     description:
       name: http
-      sha256: "759d1a329847dd0f39226c688d3e06a6b8679668e350e2891a6474f8b4bb8525"
+      sha256: "5895291c13fa8a3bd82e76d5627f69e0d85ca6a30dcac95c4ea19a5d555879c2"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "0.13.6"
   http_parser:
     dependency: transitive
     description:

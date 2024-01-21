@@ -1,8 +1,10 @@
 import 'package:final_project/providers/auth.dart';
 import 'package:final_project/providers/locale_provider.dart';
 import 'package:final_project/providers/theme_provider.dart';
+import 'package:final_project/screens/address_screen.dart';
 import 'package:final_project/screens/cart_screen.dart';
 import 'package:final_project/screens/language_screen.dart';
+import 'package:final_project/screens/payment_screen.dart';
 import 'package:final_project/utils/colors.dart';
 import 'package:final_project/utils/constants.dart';
 import 'package:final_project/utils/functions.dart';
@@ -66,7 +68,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ProfileItem(
             title: AppLocalizations.of(context)!.label_payment_methods,
             icon: Icons.payment_outlined,
-            onPress: () {},
+            onPress: () {
+              navigation(context, PaymentScreen.routeName);
+            },
           ),
           Divider(
             height: 1,
@@ -75,7 +79,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ProfileItem(
             title: AppLocalizations.of(context)!.label_address,
             icon: Icons.location_on_outlined,
-            onPress: () {},
+            onPress: () {
+              navigation(context, AddressScreen.routeName);
+            },
           ),
           ProfileItem(
             icon: Icons.language,

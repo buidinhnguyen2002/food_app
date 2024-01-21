@@ -37,7 +37,10 @@ class OrderProvider with ChangeNotifier {
   }
 
   List<Order> get activeOrder {
-    return _myOrder.where((order) => order.status == 'active').toList();
+    return _myOrder
+        .where((order) =>
+            order.status != 'cancelled' && order.status != 'completed')
+        .toList();
   }
 
   List<Order> get cancelOrder {
@@ -69,7 +72,8 @@ class OrderProvider with ChangeNotifier {
   Future<bool> placeOrder(
       {required List<CartItem> items,
       required double totalAmount,
-      required String status}) async {
+      required String status,
+      required String cusAddressId}) async {
     List<Map<String, dynamic>> itemsJson =
         items.map((item) => item.toJson()).toList();
     try {
@@ -78,7 +82,7 @@ class OrderProvider with ChangeNotifier {
         body: json.encode({
           'restaurant_id': items[0].restaurantId,
           'customer_id': id,
-          'customer_address_id': 1,
+          'customer_address_id': cusAddressId,
           'deliveryDriver_id': 1,
           'delivery_fee': 10000,
           'unit': "VNĐ",

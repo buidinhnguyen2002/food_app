@@ -1,4 +1,5 @@
 import 'package:final_project/providers/NavigatorProvider.dart';
+import 'package:final_project/providers/address_provider.dart';
 import 'package:final_project/providers/auth.dart';
 import 'package:final_project/providers/cart_provider.dart';
 import 'package:final_project/providers/category_data.dart';
@@ -12,6 +13,7 @@ import 'package:final_project/screens/address_screen.dart';
 import 'package:final_project/screens/auth_screen.dart';
 import 'package:final_project/screens/cart_screen.dart';
 import 'package:final_project/screens/checkout_screen.dart';
+import 'package:final_project/screens/edit_address_screen.dart';
 import 'package:final_project/screens/home_screen.dart';
 import 'package:final_project/screens/language_screen.dart';
 import 'package:final_project/screens/main_screen.dart';
@@ -50,6 +52,11 @@ class MyApp extends StatelessWidget {
           update: (context, auth, previous) =>
               OrderProvider(previous == null ? [] : previous.myOrder, auth.id),
         ),
+        ChangeNotifierProxyProvider<Auth, AddressProvider>(
+          create: (context) => AddressProvider([], 0),
+          update: (context, auth, previous) => AddressProvider(
+              previous == null ? [] : previous.address, auth.id),
+        ),
         ChangeNotifierProvider(create: (ctx) => RestaurantProvider()),
         ChangeNotifierProvider(create: (ctx) => ReviewProvider()),
         ChangeNotifierProvider(create: (ctx) => LocaleProvider()),
@@ -86,6 +93,7 @@ class MyApp extends StatelessWidget {
             OrderTrackingScreen.routeName: (context) =>
                 const OrderTrackingScreen(),
             LanguageScreen.routeName: (context) => const LanguageScreen(),
+            EditAddressScreen.routeName: (ctx) => const EditAddressScreen(),
           },
         ),
       ),

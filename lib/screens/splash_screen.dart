@@ -1,4 +1,5 @@
 import 'package:final_project/models/restaurant.dart';
+import 'package:final_project/providers/address_provider.dart';
 import 'package:final_project/providers/auth.dart';
 import 'package:final_project/providers/cart_provider.dart';
 import 'package:final_project/providers/category_data.dart';
@@ -41,6 +42,8 @@ class _SplashScreenState extends State<SplashScreen> {
         .fetchAndSetReview();
     await Provider.of<FoodData>(context, listen: false).fetchAndSetFood();
     await Provider.of<OrderProvider>(context, listen: false).fetchAndSetOrder();
+    await Provider.of<AddressProvider>(context, listen: false)
+        .fetchAndSetAddress();
     await Provider.of<CategoryData>(context, listen: false)
         .fetchAndSetCategory();
     await Provider.of<CartProvider>(context, listen: false).fetchAndSetMyCart();

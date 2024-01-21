@@ -26,7 +26,7 @@ class ProfileItem extends StatelessWidget {
       ),
       trailing: widgetTrailing ??
           IconButton(
-            onPressed: () {},
+            onPressed: onPress,
             icon: Icon(
               Icons.arrow_forward_ios,
               size: 20,

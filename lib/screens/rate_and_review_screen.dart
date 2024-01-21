@@ -107,6 +107,7 @@ class _RateAndReviewScreenState extends State<RateAndReviewScreen> {
                   onPress: () async {
                     bool status = await reviewProvider.addReview(
                         id, cusId.toString(), commentController.text);
+                    print("STATUS $cusId $status");
                     if (status) {
                       commentController.text = "";
                       showDialog(
