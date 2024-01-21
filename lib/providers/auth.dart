@@ -57,6 +57,36 @@ class Auth with ChangeNotifier {
     }
   }
 
+  Future<bool> register(String userName, String password, String fullName,
+      String phoneNumber) async {
+    try {
+      final response = await http.post(
+        Uri.parse(API.signUp),
+        body: json.encode({
+          'user_name': userName,
+          'password': password,
+          'full_name': fullName,
+          'phone_number': phoneNumber,
+        }),
+      );
+      final responseData = json.decode(response.body);
+      print(responseData);
+      if (responseData['status'] == 'error') {
+        throw HttpException(responseData['message']);
+      }
+      if (responseData['status'] == 'success') {
+        notifyListeners();
+        return true;
+      } else {
+        notifyListeners();
+        return false;
+      }
+      // notifyListeners();
+    } catch (error) {
+      rethrow;
+    }
+  }
+
   Locale _currentLocale = Locale('vi');
   int _selectedLanguage = 1;
   final Map<int, Locale> _locales = {

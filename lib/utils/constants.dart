@@ -32,6 +32,14 @@ class AssetConstants {
   static const logo = "${basePathImages}foodu.png";
   static const papalLogo = "${basePathImages}PayPal.png";
   static const CODPayment = "${basePathImages}COD.png";
+  static const driverMarker = "${basePathImages}drivermarker.png";
+  static const location = "${basePathImages}location.png";
+  static const discount1 = "${basePathImages}discount1.png";
+  static const discount2 = "${basePathImages}discount2.png";
+  static const discount3 = "${basePathImages}discount3.png";
+  static const discount4 = "${basePathImages}discount4.png";
+  static const discount5 = "${basePathImages}discount5.png";
+  static const discount6 = "${basePathImages}discount6.png";
 
   // ANIMATIONS
   static const basePathAnimation = "assets/animations/";

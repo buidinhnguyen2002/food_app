@@ -5,12 +5,14 @@ import 'package:final_project/providers/category_data.dart';
 import 'package:final_project/providers/food_data.dart';
 import 'package:final_project/screens/cart_screen.dart';
 import 'package:final_project/utils/colors.dart';
+import 'package:final_project/utils/constants.dart';
 import 'package:final_project/utils/functions.dart';
 import 'package:final_project/utils/widgets.dart';
 import 'package:final_project/widgets/product_item.dart';
 import 'package:final_project/widgets/product_promo_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -162,11 +164,78 @@ class _HomeScreenState extends State<HomeScreen> {
                     AppLocalizations.of(context)!.label_special_offers,
                     AppLocalizations.of(context)!.label_see_all),
                 BoxEmpty.sizeBox20,
-                Container(
-                  height: 200,
-                  decoration: const BoxDecoration(
-                    color: AppColors.primaryColor,
-                    borderRadius: BorderRadius.all(Radius.circular(40)),
+                CarouselSlider(
+                  items: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(25),
+                      child: Image.asset(
+                        AssetConstants.discount1,
+                        fit: BoxFit.cover,
+                        height: 200,
+                        width: double.infinity,
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(25),
+                      child: Image.asset(
+                        AssetConstants.discount2,
+                        fit: BoxFit.cover,
+                        height: 200,
+                        width: double.infinity,
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(25),
+                      child: Image.asset(
+                        AssetConstants.discount3,
+                        fit: BoxFit.cover,
+                        height: 200,
+                        width: double.infinity,
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(25),
+                      child: Image.asset(
+                        AssetConstants.discount4,
+                        fit: BoxFit.cover,
+                        height: 200,
+                        width: double.infinity,
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(25),
+                      child: Image.asset(
+                        AssetConstants.discount5,
+                        fit: BoxFit.cover,
+                        height: 200,
+                        width: double.infinity,
+                      ),
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(25),
+                      child: Image.asset(
+                        AssetConstants.discount6,
+                        fit: BoxFit.cover,
+                        height: 200,
+                        width: double.infinity,
+                      ),
+                    ),
+                  ],
+                  options: CarouselOptions(
+                    height: 200,
+                    // aspectRatio: 16 / 9,
+                    aspectRatio: 16 / 9,
+                    viewportFraction: 0.8,
+                    initialPage: 0,
+                    enableInfiniteScroll: true,
+                    reverse: false,
+                    autoPlay: true,
+                    autoPlayInterval: Duration(seconds: 3),
+                    autoPlayAnimationDuration: Duration(milliseconds: 800),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enlargeCenterPage: true,
+                    onPageChanged: (index, reason) {},
+                    scrollDirection: Axis.horizontal,
                   ),
                 ),
                 BoxEmpty.sizeBox20,

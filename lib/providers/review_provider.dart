@@ -19,12 +19,13 @@ class ReviewProvider with ChangeNotifier {
     try {
       final response = await http.get(Uri.parse(API.reviews));
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      print(extractedData);
       if (extractedData['status'] != 'success') return;
       final data = extractedData['data'] as List;
       _reviews = data.map((review) => Review.fromJson(review)).toList();
       notifyListeners();
     } catch (e) {
-      print("Loi $e");
+      print("Loi review $e");
     }
   }
 
