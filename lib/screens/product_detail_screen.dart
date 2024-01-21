@@ -88,7 +88,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       )
                     else
                       Text(
-                        "Available",
+                        AppLocalizations.of(context)!.label_available,
                         style: TextStyle(
                           fontSize: 14,
                           color: Theme.of(context).colorScheme.primary,
@@ -119,7 +119,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Total: ${quantity * food.price} VNĐ",
+                          "${AppLocalizations.of(context)!.label_total} ${quantity * food.price} VNĐ",
+                          // "Total: ${quantity * food.price} VNĐ",
                           style: Theme.of(context).textTheme.titleSmall,
                         ),
                         QuantitySelector(
@@ -134,7 +135,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       children: [
                         Expanded(
                           child: CommonButton(
-                            title: "Add to cart",
+                              title:  AppLocalizations.of(context)!.button_add_to_cart,
+                            // title: "Add to cart",
                             onPress: () {
                               cart.addItem(
                                 id,
@@ -151,12 +153,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ),
                         ),
                         BoxEmpty.sizeBox20,
-                        Expanded(
-                          child: CommonButton(
-                            title: "Buy now",
-                            onPress: () {},
-                          ),
-                        )
+                        // Expanded(
+                        //   child: CommonButton(
+                        //     title: "Buy now",
+                        //     onPress: () {},
+                        //   ),
+                        // )
                       ],
                     ),
                   ],
