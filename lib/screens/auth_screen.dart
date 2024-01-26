@@ -51,12 +51,12 @@ class _AuthScreenState extends State<AuthScreen> {
     try {
       final auth = Provider.of<Auth>(context, listen: false);
       if (_authMode == AuthMode.SignIn) {
-        await auth.login(
-            _authData['username'] as String, _authData['password'] as String);
         // await auth.login(
-        //   _userNameController.text,
-        //   _passwordController.text,
-        // );
+        //     _authData['username'] as String, _authData['password'] as String);
+        await auth.login(
+          _userNameController.text,
+          _passwordController.text,
+        );
       } else {
         final response = await auth.register(
           _userNameController.text,

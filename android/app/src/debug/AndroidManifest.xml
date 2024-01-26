@@ -5,4 +5,7 @@
     -->
     <uses-permission android:name="android.permission.INTERNET" />
     <application android:usesCleartextTraffic="true" />
+    <meta-data
+        android:name="com.dexterous.flutterlocalnotifications.app_icon"
+        android:resource="@mipmap/ic_launcher" />
 </manifest>

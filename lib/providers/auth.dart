@@ -10,6 +10,11 @@ class Auth with ChangeNotifier {
   bool _isLogin = false;
   int _idCart = 0;
   int _id = 0;
+  String _accessToken = "";
+  String get accessToken {
+    return _accessToken;
+  }
+
   String _avatar = "";
 
   String get avatar {
@@ -30,6 +35,7 @@ class Auth with ChangeNotifier {
 
   Future<void> login(String userName, String password) async {
     try {
+      print("${API.signIn}");
       final response = await http.post(
         Uri.parse(API.signIn),
         body: json.encode({
@@ -37,8 +43,9 @@ class Auth with ChangeNotifier {
           'password': password,
         }),
       );
+      print(response.body);
       final responseData = json.decode(response.body);
-      print(responseData);
+
       if (responseData['status'] == 'error') {
         throw HttpException(responseData['message']);
       }
@@ -48,12 +55,13 @@ class Auth with ChangeNotifier {
         _idCart = data['cart_id'];
         _id = data['id'];
         _avatar = data['avatar'];
+        _accessToken = responseData['accessToken'];
       } else {
         _isLogin = false;
       }
       notifyListeners();
     } catch (error) {
-      print("DAYyyyyyy $error");
+      print("DAYyyyyyy ${error.toString()}");
       rethrow;
     }
   }

@@ -1,4 +1,5 @@
 import 'package:final_project/models/food.dart';
+import 'package:final_project/models/notification.dart';
 import 'package:final_project/providers/auth.dart';
 import 'package:final_project/providers/cart_provider.dart';
 import 'package:final_project/providers/category_data.dart';
@@ -11,12 +12,14 @@ import 'package:final_project/utils/widgets.dart';
 import 'package:final_project/widgets/product_item.dart';
 import 'package:final_project/widgets/product_promo_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
   static AppBar appBar(BuildContext context) {
     final avatar = Provider.of<Auth>(context).avatar;
     final cartCount = Provider.of<CartProvider>(context).itemCount;
@@ -45,7 +48,13 @@ class HomeScreen extends StatefulWidget {
         Row(
           children: [
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Noti.showBigTextNotification(
+                  title: "Message title",
+                  body: "Your long body",
+                  payload: "This is notification",
+                );
+              },
               customBorder: const CircleBorder(),
               child: Container(
                 width: 46.0,

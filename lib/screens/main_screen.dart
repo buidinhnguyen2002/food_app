@@ -40,7 +40,7 @@ class _MainScreenState extends State<MainScreen> {
         return const OrderScreen();
       case 2:
         return const RestaurantScreen();
-      case 4:
+      case 3:
         return const ProfileScreen();
       default:
     }
@@ -56,7 +56,7 @@ class _MainScreenState extends State<MainScreen> {
       case 2:
         return mainAppBar(
             context, AppLocalizations.of(context)!.label_restaurant);
-      case 4:
+      case 3:
         return mainAppBar(context, AppLocalizations.of(context)!.label_profile);
       default:
     }
@@ -97,9 +97,9 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(
               icon: Icon(Icons.restaurant),
               label: AppLocalizations.of(context)!.label_restaurant),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.payment),
-              label: AppLocalizations.of(context)!.label_wallet),
+          // BottomNavigationBarItem(
+          //     icon: Icon(Icons.payment),
+          //     label: AppLocalizations.of(context)!.label_wallet),
           BottomNavigationBarItem(
               icon: Icon(Icons.person_pin_outlined),
               label: AppLocalizations.of(context)!.label_profile),

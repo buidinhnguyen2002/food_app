@@ -26,12 +26,17 @@ import 'package:final_project/screens/restaurant_review_screen.dart';
 import 'package:final_project/screens/splash_screen.dart';
 import 'package:final_project/utils/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 // import 'package:flutter_paypal_checkout/flutter_paypal_checkout.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'models/notification.dart';
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Noti.initialize();
   runApp(const MyApp());
 }
 
@@ -48,9 +53,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (ctx) => ThemeProvider()),
         ChangeNotifierProvider(create: (ctx) => CartProvider()),
         ChangeNotifierProxyProvider<Auth, OrderProvider>(
-          create: (context) => OrderProvider([], 0),
-          update: (context, auth, previous) =>
-              OrderProvider(previous == null ? [] : previous.myOrder, auth.id),
+          create: (context) => OrderProvider([], 0, ""),
+          update: (context, auth, previous) => OrderProvider(
+              previous == null ? [] : previous.myOrder,
+              auth.id,
+              auth.accessToken),
         ),
         ChangeNotifierProxyProvider<Auth, AddressProvider>(
           create: (context) => AddressProvider([], 0),
