@@ -1,3 +1,4 @@
+import 'package:final_project/models/notification.dart';
 import 'package:final_project/models/restaurant.dart';
 import 'package:final_project/providers/address_provider.dart';
 import 'package:final_project/providers/auth.dart';
@@ -12,6 +13,7 @@ import 'package:final_project/utils/constants.dart';
 import 'package:final_project/utils/functions.dart';
 import 'package:final_project/utils/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {

@@ -4,6 +4,7 @@ import 'package:final_project/utils/functions.dart';
 import 'package:final_project/utils/widgets.dart';
 import 'package:final_project/widgets/common_button.dart';
 import 'package:final_project/widgets/quantity_selector.dart';
+import 'package:final_project/widgets/relate_food_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -40,8 +41,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     if (args != null) {
       final id = args['id'];
-      final food =
-          Provider.of<FoodData>(context, listen: false).getFoodById(id);
+      final foodData = Provider.of<FoodData>(context, listen: false);
+      final food = foodData.getFoodById(id);
+      final relateFoods = foodData.getFoodByRestaurant(food.restaurantId);
       return Scaffold(
         appBar: AppBar(
           iconTheme: Theme.of(context).iconTheme,
@@ -52,7 +54,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 250,
+              height: 200,
               width: double.infinity,
               child: Image.network(
                 food.imageSource,
@@ -62,7 +64,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(
-                    left: 20, right: 20, top: 20, bottom: 20),
+                    left: 20, right: 20, top: 20, bottom: 7),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -95,6 +97,30 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
+                    BoxEmpty.sizeBox10,
+                    Text(
+                      "Food related",
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    BoxEmpty.sizeBox10,
+                    Expanded(
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          final food = relateFoods[index];
+                          return RelateFoodItem(
+                              id: food.id,
+                              imgaeSource: food.imageSource,
+                              title: food.foodName,
+                              price: food.price);
+                        },
+                        itemCount: relateFoods.length,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -135,7 +161,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       children: [
                         Expanded(
                           child: CommonButton(
-                              title:  AppLocalizations.of(context)!.button_add_to_cart,
+                            title: AppLocalizations.of(context)!
+                                .button_add_to_cart,
                             // title: "Add to cart",
                             onPress: () {
                               cart.addItem(
@@ -153,12 +180,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ),
                         ),
                         BoxEmpty.sizeBox20,
-                        // Expanded(
-                        //   child: CommonButton(
-                        //     title: "Buy now",
-                        //     onPress: () {},
-                        //   ),
-                        // )
                       ],
                     ),
                   ],

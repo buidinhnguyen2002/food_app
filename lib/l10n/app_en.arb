@@ -108,7 +108,7 @@
     "@label_total": {
         "description": "Label Available"
     },
-    "button_add_to_cart": "Add to button_add_to_cart",
+    "button_add_to_cart": "Add to cart",
     "@button_add_to_cart": {
         "description": "button add to cart"
     },

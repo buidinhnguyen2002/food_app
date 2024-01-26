@@ -11,6 +11,7 @@ import 'package:http/http.dart' as http;
 class OrderProvider with ChangeNotifier {
   List<Order> _myOrder = [];
   int id;
+  String token;
   List<Payment> payments = [
     Payment(
         name: "PayPal",
@@ -51,18 +52,23 @@ class OrderProvider with ChangeNotifier {
     return _myOrder.where((order) => order.status == 'completed').toList();
   }
 
-  OrderProvider(this._myOrder, this.id);
+  OrderProvider(this._myOrder, this.id, this.token);
 
   Future<void> fetchAndSetOrder() async {
     try {
       final response = await http.get(
         Uri.parse('${API.order}?id=$id'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
       );
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      print("FETH ORDER $extractedData");
       if (extractedData['status'] != 'success') return;
       final data = extractedData['data'] as List;
       _myOrder = data.map((food) => Order.fromJson(food)).toList();
-      print(_myOrder);
+      print("FETH ORDER $token");
       notifyListeners();
     } catch (e) {
       print("Loi order provider $e");
@@ -93,6 +99,7 @@ class OrderProvider with ChangeNotifier {
           'status': "active",
           'foods': itemsJson,
         }),
+        headers: {'Authorization': 'Bearer $token'},
       );
       final responseData = json.decode(response.body);
       if (responseData['status'] == 'success') {
@@ -114,6 +121,7 @@ class OrderProvider with ChangeNotifier {
           'id': orderId,
           'status': 'cancelled',
         }),
+        headers: {'Authorization': 'Bearer $token'},
       );
       final responseData = json.decode(response.body);
       if (responseData['status'] == 'success') {
