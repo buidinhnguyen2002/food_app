@@ -3,10 +3,10 @@ class API {
   static const l2 = '192.168.0.193';
   static const feel = '192.168.1.79';
   // nha 
-  static const nha1 = '192.168.1.9';
+  static const nha1 = '192.168.1.12';
   static const ntro = '192.168.1.29';
-  static const nfeel = '192.168.1.32';
-  static const baseUrlAPI = 'http://$nfeel:80/food_app';
+  static const nfeel = '192.168.1.20';
+  static const baseUrlAPI = 'http://$nha1:80/food_app';
   static const signIn = '$baseUrlAPI/authentication/sign-in.php';
   static const signUp = '$baseUrlAPI/authentication/sign-up.php';
   static const getAllFoods = '$baseUrlAPI/food/food.php';
